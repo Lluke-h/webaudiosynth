@@ -51,123 +51,130 @@
 
             <input type="text" size="1">
             <input type="range" id="h5" min="1" max="100">
+            <!--        </div>-->
+            <!--                <label for="harmonics">Liste des harmoniques</label>-->
+            <!--                <input type="text" id="harmonics">-->
+            <!--                <label for="amplitudes">Liste des amplitudes</label>-->
+            <!--                <input type="text" id="amplitudes">-->
+            <!--    </div>-->
         </div>
-                <label for="harmonics">Liste des harmoniques</label>
-                <input type="text" id="harmonics">
-                <label for="amplitudes">Liste des amplitudes</label>
-                <input type="text" id="amplitudes">
-    </div>
-</div>
 
-<style>
+        <style>
 
-    .wrapper {
-        font-family: "Sitka Heading", serif;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-    }
+            .wrapper {
+                font-family: "Sitka Heading", serif;
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+                justify-content: center;
+                align-items: center;
+            }
 
-    .wrapper div:last-child {
-        /*margin-right: auto;*/
-    }
+            .wrapper div:last-child {
+                /*margin-right: auto;*/
+            }
 
-    h1 {
-        text-align: center;
-    }
+            h1 {
+                text-align: center;
+            }
 
-    div > input {
-        margin: 20px;
-    }
+            div > input {
+                margin: 20px;
+            }
 
-    .keys {
-        position: relative;
-        margin-top: 10px;
-        width: 500px;
-    }
+            .keys {
+                position: relative;
+                margin-top: 10px;
+                width: 500px;
+            }
 
-    .settings {
-        display: flex;
-        flex-direction: column;
-        padding: 1rem;
-    }
+            .settings {
+                display: flex;
+                flex-direction: column;
+                padding: 1rem;
+                border: #a4a4a4 solid 2px;
+                border-radius: 1rem;
+                margin: 2rem;
+                background: #ebe7ef;
+                box-shadow: 5px 5px 10px #b6b6b6;
+            }
 
-    .harmonicsetting {
-        /* Use flexbox and center items vertically */
-        display: flex;
-        align-items: center;
-        /* The following aren't needed, they just help us to see the effect */
-        height: 2rem;
-    }
+            .harmonicsetting {
+                /* Use flexbox and center items vertically */
+                display: flex;
+                align-items: center;
+                /* The following aren't needed, they just help us to see the effect */
+                height: 2rem;
+            }
 
-    button {
-        height: 150px;
-        width: 50px;
-        border-radius: 0.25rem;
-        border: 1px solid #ccc;
-        background: #ebe7ef;
-        color: black;
-        font-size: 1rem;
-        white-space: nowrap;
-        text-decoration: none;
-        margin: 0;
-        cursor: pointer;
-        transition: all 0.05s;
-        box-shadow: 0 10px 6px 0 rgba(0, 0, 0, 0.1)
-    }
+            button {
+                height: 150px;
+                width: 50px;
+                border-radius: 0.25rem;
+                border: 1px solid #ccc;
+                background: #ebe7ef;
+                color: black;
+                font-size: 1rem;
+                white-space: nowrap;
+                text-decoration: none;
+                margin: 0;
+                cursor: pointer;
+                transition: all 0.05s;
+                box-shadow: 0 10px 6px 0 rgba(0, 0, 0, 0.1)
+            }
 
-    .black {
-        background: black;
-        width: 25px;
-        height: 100px;
-    }
+            .black {
+                background: black;
+                width: 25px;
+                height: 100px;
+            }
 
-    .white-keys {
-        display: flex;
-        justify-content: center;
-    }
+            .white-keys {
+                display: flex;
+                justify-content: center;
+            }
 
-    .black-keys {
-        position: absolute;
-        top: 0;
-        left: 17.5%
-    }
+            .black-keys {
+                position: absolute;
+                top: 0;
+                left: 17.5%
+            }
 
-    #r{
-        position: relative;
-        left: 20px;
-    }
+            #r {
+                position: relative;
+                left: 20px;
+            }
 
-    #y{
-        position: relative;
-        left: 90px;
-    }
-    #u{
-        position: relative;
-        left: 110px;
-    }
-    #i{
-        position: relative;
-        left: 130px;
-    }
+            #y {
+                position: relative;
+                left: 90px;
+            }
 
-    button:hover {
+            #u {
+                position: relative;
+                left: 110px;
+            }
 
-    }
+            #i {
+                position: relative;
+                left: 130px;
+            }
 
+            button:hover {
 
-    .active {
-
-        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-        transform: translateY(10px);
-    }
+            }
 
 
-</style>
+            .active {
 
-<script src="./scripts.js"></script>
+                box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+                transform: translateY(10px);
+            }
+
+
+        </style>
+
+        <script src="./scripts.js"></script>
 
 </body>
 </html>

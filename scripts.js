@@ -6,27 +6,26 @@ const volumeControlGain = audioCtx.createGain();
 volumeControlGain.connect(audioCtx.destination);
 
 
-
 const keyCodeNotes = {
-    s: ['C','4'],
-    d: ['D','4'],
-    f: ['E','4'],
-    g: ['F','4'],
-    h: ['G','4'],
-    j: ['A','4'],
-    k: ['B','4'],
-    l: ['C','5'],
-    e: ['Cs','4'],
-    r: ['Ds','4'],
-    y: ['Fs','4'],
-    u: ['Gs','4'],
-    i: ['As','4'],
+    s: ['C', '4'],
+    d: ['D', '4'],
+    f: ['E', '4'],
+    g: ['F', '4'],
+    h: ['G', '4'],
+    j: ['A', '4'],
+    k: ['B', '4'],
+    l: ['C', '5'],
+    e: ['Cs', '4'],
+    r: ['Ds', '4'],
+    y: ['Fs', '4'],
+    u: ['Gs', '4'],
+    i: ['As', '4'],
 };
 
 
 timbre = {
-    harmonicsMultiplicators: [1, 2, 4,9,0.5, 1.5],
-    harmonicAmplitudes: [1, 0.9, 0.2,0.6,0.8,0.7]
+    harmonicsMultiplicators: [1, 2],
+    harmonicAmplitudes: [1, 3]
 };
 
 
@@ -97,20 +96,37 @@ let tones = createTones(keyCodeNotes, timbre);
 
 // On keydown play the correct tone and make button active
 document.addEventListener('keydown', function (e) {
-    console.log(e.key)
-    tones[e.key].noteGain.connect(volumeControlGain)
+    console.log(e.key);
+    tones[e.key].noteGain.connect(volumeControlGain);
     document.querySelector(`#${e.key}`).classList.add('active')
 });
 
 // On keyUp stop playing the sound
 document.addEventListener('keyup', function (e) {
-    tones[e.key].noteGain.disconnect(volumeControlGain)
+    tones[e.key].noteGain.disconnect(volumeControlGain);
     document.querySelector(`#${e.key}`).classList.remove('active')
 });
 
-// Update timbre
-document.addEventListener('change',function (e) {
-    timbre.harmonicsMultiplicators = document.querySelector('#harmonics').value.split(',').map(Number);
-    timbre.harmonicAmplitudes = document.querySelector('#amplitudes').value.split(',').map(Number);
-    tones = createTones(keyCodeNotes, timbre)
-});
+//Update timbre
+
+function updateTimbre() {
+    const textInputs = Array.from(document.querySelectorAll('input[type=text]'));
+    timbre.harmonicsMultiplicators = textInputs.map(text => parseFloat(text.value));
+    console.log(timbre.harmonicsMultiplicators);
+
+    const ranges = Array.from(document.querySelectorAll('input[type=range]'));
+    timbre.harmonicAmplitudes = ranges.map(range => range.valueAsNumber / range.max);
+    console.log(timbre.harmonicAmplitudes);
+
+    tones = createTones(keyCodeNotes, timbre);
+
+}
+
+document.addEventListener('change', updateTimbre);
+
+// // Update timbre
+// document.addEventListener('change',function (e) {
+//     timbre.harmonicsMultiplicators = document.querySelector('#harmonics').value.split(',').map(Number);
+//     timbre.harmonicAmplitudes = document.querySelector('#amplitudes').value.split(',').map(Number);
+//     tones = createTones(keyCodeNotes, timbre)
+// });
