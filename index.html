@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Synth</title>
+</head>
+<body>
+<div class="wrapper">
+    <h1>Synthé</h1>
+    <div class="keys">
+        <button class="white" id="x">C</button>
+        <button class="black" id="d"></button>
+        <button class="white" id="c">D</button>
+        <button class="black" id="f"></button>
+        <button class="white" id="v">E</button>
+        <button class="white" id="b">F</button>
+        <button class="black second" id="h"></button>
+        <button class="white" id="n">G</button>
+        <button class="black second" id="j"></button>
+        <button class="white" id=",">A</button>
+        <button class="black second" id="k"></button>
+        <button class="white" id=";">B</button>
+        <button class="white" id=":">C</button>
+    </div>
+    <div class="settings">
+        <label for="harmonics">Liste des harmoniques</label>
+        <input type="text" id="harmonics">
+        <label for="amplitudes">Liste des amplitudes</label>
+        <input type="text" id="amplitudes">
+    </div>
+
+</div>
+
+<style>
+    .wrapper{
+        font-family: "Cambria Math",serif;
+        display: grid;
+        height: 100vh;
+        justify-content: center;
+    }
+    h1{
+        text-align: center;
+    }
+    div>input{
+        margin: 20px;
+    }
+    .keys{
+        display: flex;
+        margin-top: 10px;
+    }
+
+    button {
+        height: 10px;
+        width: 50px;
+        border-radius: 0.25rem;
+        border: 1px solid #ccc;
+        background: #ebe7ef;
+        color: black;
+        font-family: system-ui, sans-serif;
+        font-size: 1rem;
+        white-space: nowrap;
+        text-decoration: none;
+        margin: 0;
+        padding: 220px 15px 50px;
+        cursor: pointer;
+        transition: all 0.05s;
+        box-shadow: 0 10px 6px 0 rgba(0,0,0,0.1)
+    }
+
+    .black{
+        background: black;
+    }
+
+
+
+
+    button:hover{
+
+    }
+
+
+    .active{
+
+        box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+        transform: translateY(10px);
+    }
+
+
+
+
+</style>
+
+<script src="./scripts.js"></script>
+
+</body>
+</html>
