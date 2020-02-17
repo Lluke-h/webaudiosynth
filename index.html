@@ -6,86 +6,163 @@
 </head>
 <body>
 <div class="wrapper">
-    <h1>Synthé</h1>
+    <h1>🎹 Synthé 🎹</h1>
     <div class="keys">
-        <button class="white" id="x">C</button>
-        <button class="black" id="d"></button>
-        <button class="white" id="c">D</button>
-        <button class="black" id="f"></button>
-        <button class="white" id="v">E</button>
-        <button class="white" id="b">F</button>
-        <button class="black second" id="h"></button>
-        <button class="white" id="n">G</button>
-        <button class="black second" id="j"></button>
-        <button class="white" id=",">A</button>
-        <button class="black second" id="k"></button>
-        <button class="white" id=";">B</button>
-        <button class="white" id=":">C</button>
+        <div class="white-keys">
+            <button class="white" id="s"></button>
+            <button class="white" id="d"></button>
+            <button class="white" id="f"></button>
+            <button class="white" id="g"></button>
+            <button class="white" id="h"></button>
+            <button class="white" id="j"></button>
+            <button class="white" id="k"></button>
+            <button class="white" id="l"></button>
+        </div>
+        <div class="black-keys">
+            <button class="black 1" id="e"></button>
+            <button class="black 2" id="r"></button>
+            <button class="black 3" id="y"></button>
+            <button class="black 4" id="u"></button>
+            <button class="black 5" id="i"></button>
+        </div>
     </div>
     <div class="settings">
-        <label for="harmonics">Liste des harmoniques</label>
-        <input type="text" id="harmonics">
-        <label for="amplitudes">Liste des amplitudes</label>
-        <input type="text" id="amplitudes">
-    </div>
+        <p>Enter harmonics as a multiple of the fundamental and amplitudes</p>
+        <div class="harmonicsetting">
+            <input type="text" size="1">
+            <input type="range" id="h1" min="1" max="100">
+        </div>
+        <div class="harmonicsetting">
 
+            <input type="text" size="1">
+            <input type="range" id="h2" min="1" max="100">
+        </div>
+        <div class="harmonicsetting">
+
+            <input type="text" size="1">
+            <input type="range" id="h3" min="1" max="100">
+        </div>
+        <div class="harmonicsetting">
+
+            <input type="text" size="1">
+            <input type="range" id="h4" min="1" max="100">
+        </div>
+        <div class="harmonicsetting">
+
+            <input type="text" size="1">
+            <input type="range" id="h5" min="1" max="100">
+        </div>
+                <label for="harmonics">Liste des harmoniques</label>
+                <input type="text" id="harmonics">
+                <label for="amplitudes">Liste des amplitudes</label>
+                <input type="text" id="amplitudes">
+    </div>
 </div>
 
 <style>
-    .wrapper{
-        font-family: "Cambria Math",serif;
-        display: grid;
+
+    .wrapper {
+        font-family: "Sitka Heading", serif;
+        display: flex;
+        flex-direction: column;
         height: 100vh;
         justify-content: center;
+        align-items: center;
     }
-    h1{
+
+    .wrapper div:last-child {
+        /*margin-right: auto;*/
+    }
+
+    h1 {
         text-align: center;
     }
-    div>input{
+
+    div > input {
         margin: 20px;
     }
-    .keys{
-        display: flex;
+
+    .keys {
+        position: relative;
         margin-top: 10px;
+        width: 500px;
+    }
+
+    .settings {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .harmonicsetting {
+        /* Use flexbox and center items vertically */
+        display: flex;
+        align-items: center;
+        /* The following aren't needed, they just help us to see the effect */
+        height: 2rem;
     }
 
     button {
-        height: 10px;
+        height: 150px;
         width: 50px;
         border-radius: 0.25rem;
         border: 1px solid #ccc;
         background: #ebe7ef;
         color: black;
-        font-family: system-ui, sans-serif;
         font-size: 1rem;
         white-space: nowrap;
         text-decoration: none;
         margin: 0;
-        padding: 220px 15px 50px;
         cursor: pointer;
         transition: all 0.05s;
-        box-shadow: 0 10px 6px 0 rgba(0,0,0,0.1)
+        box-shadow: 0 10px 6px 0 rgba(0, 0, 0, 0.1)
     }
 
-    .black{
+    .black {
         background: black;
+        width: 25px;
+        height: 100px;
+    }
+
+    .white-keys {
+        display: flex;
+        justify-content: center;
+    }
+
+    .black-keys {
+        position: absolute;
+        top: 0;
+        left: 17.5%
+    }
+
+    #r{
+        position: relative;
+        left: 20px;
+    }
+
+    #y{
+        position: relative;
+        left: 90px;
+    }
+    #u{
+        position: relative;
+        left: 110px;
+    }
+    #i{
+        position: relative;
+        left: 130px;
+    }
+
+    button:hover {
+
     }
 
 
+    .active {
 
-
-    button:hover{
-
-    }
-
-
-    .active{
-
-        box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
         transform: translateY(10px);
     }
-
-
 
 
 </style>
