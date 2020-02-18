@@ -52,7 +52,7 @@ function getFrequency(noteName) {
 
 // Generates an array of tone objects for each keyboard key
 function createTones(keyCodeNotes, timbre) {
-
+    console.log('create Tones !')
     let tones = {};
 
     for (let [key, noteName] of Object.entries(keyCodeNotes)) {
@@ -91,7 +91,8 @@ function createTones(keyCodeNotes, timbre) {
 }
 
 function destroyTones(tones){
-    Object.values(tones).forEach(tone => tone.oscs.forEach(osc => {osc.stop(); osc.disconnect()}));
+    console.log('destroyed all Oscillators')
+    Object.values(tones).forEach(tone => tone.oscs.forEach(osc => {osc.stop(); }));
 }
 
 // create tones with the initial timbre
@@ -99,7 +100,6 @@ let tones = createTones(keyCodeNotes, timbre);
 
 // On keydown play the correct tone and make button active
 document.addEventListener('keydown', function (e) {
-    console.log(e.key);
     tones[e.key].noteGain.connect(volumeControlGain);
     document.querySelector(`#${e.key}`).classList.add('active')
 });
@@ -114,7 +114,7 @@ document.addEventListener('keyup', function (e) {
 
 function updateTimbre() {
     const textInputs = Array.from(document.querySelectorAll('input[type=text]'));
-    timbre.harmonicsMultiplicators = textInputs.map(text => parseFloat(text.value));
+    timbre.harmonicsMultiplicators = textInputs.map(text => isNaN(parseFloat(text.value)) ? 0 : parseFloat(text.value));
     console.log(timbre.harmonicsMultiplicators);
 
     const ranges = Array.from(document.querySelectorAll('input[type=range]'));
