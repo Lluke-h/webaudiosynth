@@ -24,8 +24,8 @@ const keyCodeNotes = {
 
 
 timbre = {
-    harmonicsMultiplicators: [1, 2],
-    harmonicAmplitudes: [1, 3]
+    harmonicsMultiplicators: [1],
+    harmonicAmplitudes: [2]
 };
 
 
@@ -68,7 +68,7 @@ function createTones(keyCodeNotes, timbre) {
             let osc = audioCtx.createOscillator();
             let harmonicGain = audioCtx.createGain();
             osc.frequency.value = fundFreq * timbre.harmonicsMultiplicators[i];
-            osc.start();
+            osc.start(0);
             harmonicGain.gain.value = timbre.harmonicAmplitudes[i];
 
             osc.connect(harmonicGain);
@@ -90,6 +90,9 @@ function createTones(keyCodeNotes, timbre) {
     return tones
 }
 
+function destroyTones(tones){
+    Object.values(tones).forEach(tone => tone.oscs.forEach(osc => {osc.stop(); osc.disconnect()}));
+}
 
 // create tones with the initial timbre
 let tones = createTones(keyCodeNotes, timbre);
@@ -118,6 +121,7 @@ function updateTimbre() {
     timbre.harmonicAmplitudes = ranges.map(range => range.valueAsNumber / range.max);
     console.log(timbre.harmonicAmplitudes);
 
+    destroyTones(tones);
     tones = createTones(keyCodeNotes, timbre);
 
 }
