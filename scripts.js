@@ -24,8 +24,8 @@ const keyCodeNotes = {
 
 
 timbre = {
-    harmonicsMultiplicators: [1],
-    harmonicAmplitudes: [2]
+    harmonicsMultiplicators: [1, 4.0324,   10.0274,   17.3458],
+    harmonicAmplitudes: [0.9731,    0.8694,    1.0000,    0.9088]
 };
 
 
@@ -52,14 +52,15 @@ function getFrequency(noteName) {
 
 // Generates an array of tone objects for each keyboard key
 function createTones(keyCodeNotes, timbre) {
-    console.log('create Tones !')
+    console.log('create Tones !');
     let tones = {};
 
     for (let [key, noteName] of Object.entries(keyCodeNotes)) {
 
         const fundFreq = getFrequency(noteName);  // fundamental frequency in Hertz
         const noteGain = audioCtx.createGain();
-        // noteGain.connect(volumeControlGain);
+        noteGain.gain.value = 0;
+        noteGain.connect(volumeControlGain);
 
         let oscs = [];
         let harmonicGains = [];
@@ -80,6 +81,7 @@ function createTones(keyCodeNotes, timbre) {
         }
 
         tones[key] = {
+            playing: false,
             note: noteName,
             oscs: oscs,
             harmonicGains: harmonicGains,
@@ -90,27 +92,47 @@ function createTones(keyCodeNotes, timbre) {
     return tones
 }
 
-function destroyTones(tones){
-    console.log('destroyed all Oscillators')
-    Object.values(tones).forEach(tone => tone.oscs.forEach(osc => {osc.stop(); }));
+function destroyTones(tones) {
+    console.log('destroyed all Oscillators');
+    Object.values(tones).forEach(tone => tone.oscs.forEach(osc => {
+        osc.stop();
+    }));
 }
 
+function playNote(e){
+    let now = audioCtx.currentTime;
+    if (tones[e.key].playing === false){
+        tones[e.key].playing = true;
+        tones[e.key].noteGain.gain.cancelScheduledValues( now );
+        console.log('Connected');
+        tones[e.key].noteGain.gain.setValueAtTime(1, now);
+        tones[e.key].noteGain.gain.exponentialRampToValueAtTime(0.001, now + 1.9);
+        document.querySelector(`#${e.key}`).classList.add('active')
+    }
+
+}
 // create tones with the initial timbre
 let tones = createTones(keyCodeNotes, timbre);
 
 // On keydown play the correct tone and make button active
 document.addEventListener('keydown', function (e) {
-    tones[e.key].noteGain.connect(volumeControlGain);
-    document.querySelector(`#${e.key}`).classList.add('active')
+    // tones[e.key].noteGain.connect(volumeControlGain);
+    playNote(e);
 });
 
 // On keyUp stop playing the sound
 document.addEventListener('keyup', function (e) {
-    tones[e.key].noteGain.disconnect(volumeControlGain);
+    tones[e.key].noteGain.gain.cancelScheduledValues( audioCtx.currentTime);
+    tones[e.key].noteGain.gain.setValueAtTime(0, audioCtx.currentTime);
+    tones[e.key].playing = false;
     document.querySelector(`#${e.key}`).classList.remove('active')
 });
 
-//Update timbre
+
+function randomIntFromInterval(min, max) { // min and max included
+    return Math.round(Math.random() * (max - min + 1) + min);
+}
+
 
 function updateTimbre() {
     const textInputs = Array.from(document.querySelectorAll('input[type=text]'));
@@ -118,12 +140,29 @@ function updateTimbre() {
     console.log(timbre.harmonicsMultiplicators);
 
     const ranges = Array.from(document.querySelectorAll('input[type=range]'));
-    timbre.harmonicAmplitudes = ranges.map(range => range.valueAsNumber / range.max);
+    timbre.harmonicAmplitudes = ranges.map(range => {
+        let value = range.valueAsNumber / range.max;
+        range.nextElementSibling.textContent = value;
+        console.log(range.nextElementSibling);
+        return value
+    });
     console.log(timbre.harmonicAmplitudes);
 
     destroyTones(tones);
     tones = createTones(keyCodeNotes, timbre);
 
+}
+
+function randomizeTimbre() {
+    const textInputs = Array.from(document.querySelectorAll('input[type = text]'));
+    textInputs.forEach(textInput => textInput.value = randomIntFromInterval(1, 20) * 0.5 - 1);
+
+    const ranges = Array.from(document.querySelectorAll('input[type=range]'));
+    ranges.forEach(range => {
+        range.value = randomIntFromInterval(1, 100)
+    });
+
+    updateTimbre()
 }
 
 document.addEventListener('change', updateTimbre);

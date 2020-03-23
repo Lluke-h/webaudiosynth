@@ -27,37 +27,56 @@
         </div>
     </div>
     <div class="settings">
-        <p>Enter harmonics as a multiple of the fundamental and amplitudes</p>
-        <div class="harmonicsetting">
-            <input type="text" size="1">
-            <input type="range" id="h1" min="1" max="100">
-        </div>
-        <div class="harmonicsetting">
+        <div class="sliders">
+            <p>Harmonics and amplitudes</p>
+            <div class="harmonicsetting">
+                <input type="text" size="1">
+                <input type="range" id="h1" min="1" max="100">
+                <span></span>
+            </div>
+            <div class="harmonicsetting">
 
-            <input type="text" size="1">
-            <input type="range" id="h2" min="1" max="100">
-        </div>
-        <div class="harmonicsetting">
+                <input type="text" size="1">
+                <input type="range" id="h2" min="1" max="100">
+                <span></span>
+            </div>
+            <div class="harmonicsetting">
 
-            <input type="text" size="1">
-            <input type="range" id="h3" min="1" max="100">
-        </div>
-        <div class="harmonicsetting">
+                <input type="text" size="1">
+                <input type="range" id="h3" min="1" max="100">
+                <span></span>
+            </div>
+            <div class="harmonicsetting">
 
-            <input type="text" size="1">
-            <input type="range" id="h4" min="1" max="100">
-        </div>
-        <div class="harmonicsetting">
+                <input type="text" size="1">
+                <input type="range" id="h4" min="1" max="100">
+                <span></span>
+            </div>
+            <div class="harmonicsetting">
 
-            <input type="text" size="1">
-            <input type="range" id="h5" min="1" max="100">
-            <!--        </div>-->
-            <!--                <label for="harmonics">Liste des harmoniques</label>-->
-            <!--                <input type="text" id="harmonics">-->
-            <!--                <label for="amplitudes">Liste des amplitudes</label>-->
-            <!--                <input type="text" id="amplitudes">-->
-            <!--    </div>-->
+                <input type="text" size="1">
+                <input type="range" id="h5" min="1" max="100">
+                <span></span>
+                <!--        </div>-->
+                <!--                <label for="harmonics">Liste des harmoniques</label>-->
+                <!--                <input type="text" id="harmonics">-->
+                <!--                <label for="amplitudes">Liste des amplitudes</label>-->
+                <!--                <input type="text" id="amplitudes">-->
+                <!--    </div>-->
+            </div>
+            <div class="harmonicsetting">
+                <input type="text" size="1">
+                <input type="range" id="h6" min="1" max="100">
+                <span></span>
+            </div>
+            <div class="harmonicsetting">
+                <input type="text" size="1">
+                <input type="range" id="h7" min="1" max="100">
+                <span></span>
+            </div>
         </div>
+        <button id="randomize" onclick="randomizeTimbre();" > Random</button>
+    </div>
 
         <style>
 
@@ -90,13 +109,15 @@
 
             .settings {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 padding: 1rem;
                 border: #a4a4a4 solid 2px;
                 border-radius: 1rem;
                 margin: 2rem;
                 background: #ebe7ef;
                 box-shadow: 5px 5px 10px #b6b6b6;
+                justify-content: center;
+                align-items: center;
             }
 
             .harmonicsetting {
@@ -107,7 +128,7 @@
                 height: 2rem;
             }
 
-            button {
+            .white, .black{
                 height: 150px;
                 width: 50px;
                 border-radius: 0.25rem;
@@ -164,7 +185,9 @@
 
             }
 
-
+            #randomize{
+                margin-left: 2rem;
+            }
             .active {
 
                 box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
